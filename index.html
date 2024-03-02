@@ -1,0 +1,923 @@
+<!-- Code from d3-graph-gallery.com -->
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<!-- Load d3.js -->
+<script src="http://d3js.org/d3.v4.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+
+
+  <div id="container">
+
+    <section class="galaxy-wrapper">
+        <canvas id="galaxy" width="500px" height="900px"></canvas>
+    </section>
+
+    <h2 class="frame-5">
+      <span >10 Famous</span>
+      <span >Monuments</span>
+      <span >in England</span>
+    </h2>
+
+   <div id="background">
+      <div class="blur"></div>
+    </div>
+
+    <video width="320" height="240" controls>
+      <source src="Main Logo- 25s no fade.mp4" type="video/mp4">   
+    </video>
+
+
+     <div id="one" >
+        <div class="encima"></div>
+        <h2 class="frame-1">1. <span>Buckingham</span> Palace</h2>
+     </div>
+
+     <div id="two"  style="display: none">
+        <div class="encima"></div>
+        <h2 class="frame-1">2. <span>Westminster</span> Abbey</h2>
+     </div>
+
+    <div id="three" style="display: none">
+        <div class="encima"></div>
+        <h2 class="frame-1">3. <span>Palace</span> of Westminster</h2>
+     </div>
+
+      <div id="four" style="display: none">
+        <div class="encima"></div>
+        <h2 class="frame-1">4. <span>Big</span> Ben</h2>
+     </div>
+
+     <div id="five" style="display: none">
+        <div class="encima"></div>
+        <h2 class="frame-1">5. <span>St. Paul’s</span> Cathedral</h2>
+     </div>
+
+     <div id="six" style="display: none">
+        <div class="encima"></div>
+        <h2 class="frame-1">6. <span>Windsor</span> Castle</h2>
+     </div>
+
+     <div id="seven" style="display: none">
+        <div class="encima"></div>
+        <h2 class="frame-1">7. <span>The Roman</span> Baths</h2>
+     </div>
+
+     <div id="eight" style="display: none">
+        <div class="encima"></div>
+        <h2 class="frame-1">8. <span>York</span> Minster</h2>
+     </div>
+
+     <div id="nine" style="display: none">
+        <div class="encima"></div>
+        <h2 class="frame-1">9. <span>Blenheim</span> Palace</h2>
+     </div>
+
+     <div id="ten" style="display: none">
+        <div class="encima"></div>
+        <h2 class="frame-1">10. <span>Whitby</span> Abbey</h2>
+     </div>
+
+<!-- 
+     <div id="eleven" style="display: none">
+        <div class="encima"></div>
+        <h2 class="frame-1">11. <span>Tower</span> of London</h2>
+     </div>
+
+     <div id="twelve" style="display: none">
+        <div class="encima"></div>
+        <h2 class="frame-1">12. <span>Hadrian’s</span> Wall</h2>
+     </div>
+
+     <div id="thirteen" style="display: none">
+        <div class="encima"></div>
+        <h2 class="frame-1">13. <span>Alnwick</span> Castle</h2>
+     </div>
+
+
+     <div id="fourteen" style="display: none">
+        <div class="encima"></div>
+        <h2 class="frame-1">14. <span>Leeds</span> Castle</h2>
+     </div>
+
+     <div id="fifteen" style="display: none">
+        <div class="encima"></div>
+        <h2 class="frame-1">15. <span>Warwick</span> Castle</h2>
+     </div> -->
+  </div> 
+
+<style>
+
+@font-face {
+   font-family: Aveny;
+   src: url(Aveny T WEB.ttf);
+}
+
+#container{
+  width: 500px;
+  height: 900px;
+  position: relative;
+  margin: auto;
+  overflow: hidden;
+}
+
+#container video{
+  background-color: red;
+  position: absolute;
+  bottom:50px;
+  z-index: 10000;
+}
+
+#background {
+  position: absolute;
+  top: 101px;
+  height: 732px;
+  width: 100%;
+  z-index: 1100;
+}
+
+.blur {
+  animation:  changeWidth 2s ease-in-out ;
+  animation-fill-mode: forwards;
+  background: rgba(255, 255, 255, 0.8); 
+  backdrop-filter: blur(15px); 
+  height: 796px;
+  z-index: 1100;
+  box-shadow: 0px 0px 2px red;
+ // transform: rotateZ(0deg) ;
+}
+/*@keyframes rotate--Z {
+  0% {
+    transform: rotateZ(0deg) ;
+  }
+  75% {
+    transform: rotateZ(0deg);
+  }
+  100% {
+    transform: rotateZ(30deg) ;
+  }
+}*/
+
+@keyframes changeWidth {
+  0% {
+    width: 100%;
+  }
+
+  100% {
+    width: 0%;
+  }
+}
+
+
+/* main first text doesnt disapiar */
+#container .frame-5 {
+  position: absolute;
+  top: 0px;
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 42px;
+  width: 100%;
+  height: 100px;
+  text-align: center;
+  z-index: 1100;
+  background: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 6px 6px -5px #ff0c0c;
+  backdrop-filter: blur(2px); 
+ // transform: rotateZ(0deg) ;
+}
+
+h2.frame-5 span {
+  display: inline-block;
+  font-family: Aveny;
+  animation:vibrate-2 0.3s linear infinite both;
+  color: black;
+  text-shadow: 2px 0 #fff, -2px 0 #fff, 0 2px #fff, 0 -2px #fff,
+               1px 1px #fff, -1px -1px #fff, 1px -1px #fff, -1px 1px #fff;
+  /*text-shadow: 2px 0 #7d7d7d, -2px 0 #7d7d7d, 0 2px #7d7d7d, 0 -2px #7d7d7d,
+               1px 1px #7d7d7d, -1px -1px #7d7d7d, 1px -1px #7d7d7d, -1px 1px #7d7d7d;*/
+}
+
+/*h2.frame-5 span:nth-child(2) {
+  animation-delay: 1.2s;
+}
+h2.frame-5 span:nth-child(3) {
+  animation-delay: 1.5s;
+}*/
+
+@keyframes blurFadeIn {
+  0% {
+    opacity: 0;
+    text-shadow: 0px 0px 6px red;
+    transform: scale(1.3);
+  }
+  50% {
+    opacity: 0.5;
+    text-shadow: 0px 0px 2px red;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    text-shadow: 0px 0px 15px #ff0000;
+    transform: scale(1);
+  }
+}
+
+
+/* images slide */
+/**
+ * ----------------------------------------
+ * animation kenburns
+ * ----------------------------------------
+ */
+.jello-horizontal {
+  -webkit-animation: jello-horizontal 0.9s both;
+          animation: jello-horizontal 0.9s both;
+}
+
+/* BG Efects animista */
+.kenburns-right {
+          animation: kenburns-right 10s ease-out both;
+}
+.kenburns-bottom {
+          animation: kenburns-bottom 10s ease-out both;
+}
+.kenburns-top-left {
+          animation: kenburns-top-left 10s ease-out both;
+}
+.kenburns-top-right {
+          animation: kenburns-top-right 10s ease-out both;
+}
+.kenburns-top {
+  -webkit-animation: kenburns-top 5s ease-out both;
+          animation: kenburns-top 5s ease-out reverse;
+}
+
+
+.vibrate-2 {
+  -webkit-animation: vibrate-2 0.3s linear infinite both;
+          animation: vibrate-2 0.3s linear infinite both;
+}
+
+@-webkit-keyframes kenburns-top {
+  0% {
+    -webkit-transform: scale(1) translateY(0);
+            transform: scale(1) translateY(0);
+    -webkit-transform-origin: 50% 16%;
+            transform-origin: 50% 16%;
+  }
+  100% {
+    -webkit-transform: scale(1.25) translateY(-15px);
+            transform: scale(1.25) translateY(-15px);
+    -webkit-transform-origin: top;
+            transform-origin: top;
+  }
+}
+@keyframes kenburns-top {
+  0% {
+    -webkit-transform: scale(1) translateY(0);
+            transform: scale(1) translateY(0);
+    -webkit-transform-origin: 50% 16%;
+            transform-origin: 50% 16%;
+  }
+  100% {
+    -webkit-transform: scale(1.25) translateY(-15px);
+            transform: scale(1.25) translateY(-15px);
+    -webkit-transform-origin: top;
+            transform-origin: top;
+  }
+}
+
+@keyframes vibrate-2 {
+  0% {
+    -webkit-transform: translate(0);
+            transform: translate(0);
+  }
+  20% {
+    -webkit-transform: translate(2px, -2px);
+            transform: translate(2px, -2px);
+  }
+  40% {
+    -webkit-transform: translate(2px, 2px);
+            transform: translate(2px, 2px);
+  }
+  60% {
+    -webkit-transform: translate(-2px, 2px);
+            transform: translate(-2px, 2px);
+  }
+  80% {
+    -webkit-transform: translate(-2px, -2px);
+            transform: translate(-2px, -2px);
+  }
+  100% {
+    -webkit-transform: translate(0);
+            transform: translate(0);
+  }
+}
+
+
+.galaxy-wrapper {  
+  background: radial-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.3) 60%, rgba(0, 0, 0, 0.7));
+  //background-color:rgba(187, 0, 102,.5);
+  background-blend-mode:overlay;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: block;
+  height: 100%;
+  overflow: hidden;
+  position: absolute;
+  overflow: hidden;
+  top: 0;
+  width: 100%;
+  z-index: 1050;
+}
+
+/*#eleven:before , #twelve:before ,
+    #thirteen:before , #fourteen:before , #fifteen:before*/
+#one:before, #two:before , #three:before ,
+ #four:before , #five:before , #six:before , 
+  #seven:before , #eight:before , #nine:before ,  #ten:before  {
+  content:'';
+  top:0;
+  transform:translateX(100%);
+  width:400%;
+  height:100%;
+  position: absolute;
+  z-index:1099;
+  animation: slide 0.6s;   
+  background: linear-gradient(to right, 
+    rgba(255,255,255,0) 0%,
+    rgba(255,255,255,0.8) 50%,
+    rgba(128,186,232,0) 99%,
+    rgba(125,185,232,0) 100%); 
+
+  //linear-gradient(to right, rgba(255,255,255,0)
+   98%,rgba(255,255,255,0.8) 31%,rgba(128,186,232,0) 99%,rgba(125,185,232,0) 75%);
+}
+
+@keyframes slide {
+  0% {transform:translateX(-100%);}
+  100% {transform:translateX(100%);}
+}
+
+
+@keyframes jello-horizontal {
+  0% {
+    -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1);
+  }
+  30% {
+    -webkit-transform: scale3d(1.25, 0.75, 1);
+            transform: scale3d(1.25, 0.75, 1);
+  }
+  40% {
+    -webkit-transform: scale3d(0.75, 1.25, 1);
+            transform: scale3d(0.75, 1.25, 1);
+  }
+  50% {
+    -webkit-transform: scale3d(1.15, 0.85, 1);
+            transform: scale3d(1.15, 0.85, 1);
+  }
+  65% {
+    -webkit-transform: scale3d(0.95, 1.05, 1);
+            transform: scale3d(0.95, 1.05, 1);
+  }
+  75% {
+    -webkit-transform: scale3d(1.05, 0.95, 1);
+            transform: scale3d(1.05, 0.95, 1);
+  }
+  100% {
+    -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1);
+  }
+}
+
+
+@keyframes kenburns-top-right {
+  0% {
+    -webkit-transform: scale(1) translate(0, 0);
+            transform: scale(1) translate(0, 0);
+    -webkit-transform-origin: 84% 16%;
+            transform-origin: 84% 16%;
+  }
+  100% {
+    -webkit-transform: scale(1.15) translate(20px, -15px);
+            transform: scale(1.15) translate(20px, -15px);
+    -webkit-transform-origin: right top;
+            transform-origin: right top;
+  }
+}
+
+@keyframes kenburns-top-left {
+  0% {
+    -webkit-transform: scale(1) translate(0, 0);
+            transform: scale(1) translate(0, 0);
+    -webkit-transform-origin: 16% 16%;
+            transform-origin: 16% 16%;
+  }
+  100% {
+    -webkit-transform: scale(1.15) translate(-20px, -15px);
+            transform: scale(1.15) translate(-20px, -15px);
+    -webkit-transform-origin: top left;
+            transform-origin: top left;
+  }
+}
+
+
+@keyframes kenburns-bottom {
+  0% {
+    -webkit-transform: scale(1) translateY(0);
+            transform: scale(1) translateY(0);
+    -webkit-transform-origin: 50% 84%;
+            transform-origin: 50% 84%;
+  }
+  100% {
+    -webkit-transform: scale(1.15) translateY(15px);
+            transform: scale(1.15) translateY(15px);
+    -webkit-transform-origin: bottom;
+            transform-origin: bottom;
+  }
+}
+
+
+
+@keyframes kenburns-right {
+  0% {
+    -webkit-transform: scale(1) translate(0, 0);
+            transform: scale(1) translate(0, 0);
+    -webkit-transform-origin: 84% 50%;
+            transform-origin: 84% 50%;
+  }
+  100% {
+    -webkit-transform: scale(1.15) translateX(20px);
+            transform: scale(1.15) translateX(20px);
+    -webkit-transform-origin: right;
+            transform-origin: right;
+  }
+}
+
+
+
+
+.encima{
+  background-size: cover;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  -webkit-mask: url(triangels-for-animation.png);
+  -webkit-mask-size: 3000% 100%;
+  opacity: 1 ;
+  z-index: 1100;
+}
+.encima:before{
+  content: '';
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1100;
+}
+.encima-anim{
+   z-index: 1200;
+   animation:  mask-playzero 5s steps(29);
+}
+
+#one .encima-anim{
+   animation-fill-mode: forwards;
+}
+#one, #two, #three, #four, #five, #six, #seven, #eight, #nine, #ten, #eleven, #twelve,#thirteen,#fourteen,#fifteen{
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1002;
+    background: radial-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.3) 35%, rgba(0, 0, 0, 0.7));
+}
+
+
+#one {
+  background-image: url(1.1.jpg);
+  background-repeat:  no-repeat;
+  background-size: cover;
+  //background-size: 300px 100px;
+  background-position-x: -542px;;
+ } 
+#two {
+  background: url(2.1.jpg) no-repeat  top;
+  background-repeat:  no-repeat;
+  background-size: cover;
+ }
+ #three{
+  background: url(3.1.jpg) no-repeat  top;
+  background-repeat:  no-repeat;
+      background-size: cover;
+      background-position-x: right;
+ } 
+#four{
+  background: url(4.1.jpg) no-repeat  top;
+  background-repeat:  no-repeat;
+      background-size: cover;
+ } 
+ #five {
+  background: url(5.1.jpg) no-repeat  top;
+  background-repeat:  no-repeat;
+      background-size: cover;
+ } 
+#six {
+  background-image: url(6.1.jpg);
+  background-repeat:  no-repeat;
+      background-size: cover;
+      background-position-x: -620px;
+    //background-position-y: 60px; //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ } 
+#seven {
+  background: url(7.1.jpg) no-repeat  top;
+  background-repeat:  no-repeat;
+      background-size: cover;
+ }
+ #eight{
+  background: url(8.1.jpg) no-repeat  top;
+  background-repeat:  no-repeat;
+      background-size: cover;
+     // background-position-y: 90px;
+ } 
+#nine{
+  background: url(9.1.jpg) no-repeat  top;
+  background-repeat:  no-repeat;
+      background-size: cover;
+      background-position-x: -350px;
+ } 
+ #ten {
+  background: url(10.1.jpg) no-repeat  top;
+  background-repeat:  no-repeat;
+      background-size: cover;
+ } 
+
+/* #eleven {
+  background-image: url(11.1.jpg);
+  background-repeat:  no-repeat;
+      background-size: cover;
+ } 
+#twelve {
+  background: url(12.1.jpg) no-repeat  top;
+  background-repeat:  no-repeat;
+      background-size: cover;
+ }
+ #thirteen{
+  background: url(13.1.jpg) no-repeat  top;
+  background-repeat:  no-repeat;
+      background-size: cover;
+ } 
+#fourteen{
+  background: url(14.1.jpg) no-repeat  top;
+  background-repeat:  no-repeat;
+      background-size: cover;
+ } 
+ #fifteen {
+  background: url(15.1.jpg) no-repeat  top;
+  background-repeat:  no-repeat;
+      background-size: cover;
+ } */
+
+
+
+#one .encima:before{
+  background-image: url(1.2.jpg);
+  background-repeat:  no-repeat;
+  background-position:  top;
+ // background-position-y: 50px;//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+}
+#two .encima:before{
+  background: url(2.2.jpg) no-repeat  top;
+  background-repeat:  no-repeat;
+  background-size: cover;
+
+}
+#three .encima:before{
+  background: url(3.2.jpg) no-repeat  top;
+  background-repeat:  no-repeat;
+  background-size: cover;
+  background-position-x:-200px;
+}
+#four .encima:before{
+  background: url(4.2.jpg) no-repeat  top;
+   background-repeat:  no-repeat;
+  background-size: cover;
+}
+#five .encima:before{
+  background: url(5.2.jpg) no-repeat  top;
+   background-repeat:  no-repeat;
+  background-size: cover;
+}
+#six .encima:before{
+  background: url(6.2.jpg) no-repeat  top;
+  background-repeat:  no-repeat;
+  background-size: cover;
+}
+#seven .encima:before{
+  background: url(7.2.jpg) no-repeat  top;
+  background-repeat:  no-repeat;
+  background-size: cover;
+
+}
+#eight .encima:before{
+  background: url(8.2.jpg) no-repeat  top;
+  background-repeat:  no-repeat;
+  background-size: cover;
+}
+#nine .encima:before{
+  background: url(9.2.jpg) no-repeat  top;
+   background-repeat:  no-repeat;
+  background-size: cover;
+}
+#ten .encima:before{
+  background: url(10.2.jpg) no-repeat  top;
+   background-repeat:  no-repeat;
+  background-size: cover;
+}
+/*
+#eleven .encima:before{
+  background-image: url(11.2.jpg);
+  background-repeat:  no-repeat;
+  background-position:  top;
+}
+#twelve .encima:before{
+  background: url(12.2.jpg) no-repeat  top;
+  background-repeat:  no-repeat;
+  background-size: cover;
+
+}
+#thirteen .encima:before{
+  background: url(13.2.jpg) no-repeat  top;
+  background-repeat:  no-repeat;
+  background-size: cover;
+}
+#fourteen .encima:before{
+  background: url(14.2.jpg) no-repeat  top;
+   background-repeat:  no-repeat;
+  background-size: cover;
+}
+#fifteen .encima:before{
+  background: url(15.2.jpg) no-repeat  top;
+   background-repeat:  no-repeat;
+  background-size: cover;
+}
+
+*/
+
+/*#one:after,#two:after , #three:after , #four:after , #five:after , #six:after , 
+  #seven:after , #eight:after , #nine:after ,  #ten:after  {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 120px;
+  z-index: 10000;
+
+  background: rgba(255, 255, 255, 0.6);
+    box-shadow: 0px 0px 4px 3px red;
+    backdrop-filter: blur(5px);
+
+ 
+  animation: kenburns-top 5s ease-out reverse;
+  background-size: 100%;
+  background-position-y:  -500px;
+  background-repeat:  no-repeat;
+   filter: blur(2px);
+  -webkit-filter: blur(2px);
+  box-shadow: 0 31px 6px 36px rgb(87 0 0);
+  //background: rgba(255, 255, 255, 0.6);
+}
+
+#one:after{
+  background-image: url(1.1.jpg);
+}
+ #two:after{
+   background-image: url(2.1.jpg);
+}
+#three:after{
+   background-image: url(3.2.jpg);
+}
+#four:after{
+   background-image: url(4.2.jpg);
+}
+#five:after{
+   background-image: url(5.2.jpg);
+}
+#six:after{
+  background-image: url(6.2.jpg);
+}
+#seven:after{
+   background-image: url(7.2.jpg);
+}
+#eight:after{
+   background-image: url(8.2.jpg);
+}
+#nine:after{
+   background-image: url(9.2.jpg);
+}
+#ten:after{
+   background-image: url(10.2.jpg);
+}
+*/
+
+
+/*second text, fideout animation*/
+
+.frame-1{
+  animation: blurFadeInOut 3.5s ease-in forwards;
+  animation-delay:0.6s;
+  position: absolute;
+  top: 50%;
+  z-index: 10000;
+  height: 90px;
+  font-size: 45px;
+  width: 100%;
+  text-align: center;
+  opacity: 0;
+  text-shadow: -3px 4px 0px black;
+  //color: black;
+  color: white;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+ text-shadow: 2px 0 #fff, -2px 0 #fff, 0 2px #fff, 0 -2px #fff,
+               1px 1px #fff, -1px -1px #fff, 1px -1px #fff, -1px 1px #fff; 
+  text-shadow: 2px 0 30px black, -2px 0 30px  black, 0 2px 30px  black, 0 -2px 30px black,
+               1px 1px 30px black, -1px -1px 30px black, 1px -1px 30px  black, -1px 1px 30px black;               
+}
+
+.frame-1 span{
+  color: green;
+}
+
+#one .frame-1 {
+   animation: blurFadeInOut 7.5s ease-in forwards;
+  animation-delay: 1.5s;
+}
+
+
+@keyframes blurFadeInOut {
+  0% {
+    opacity: 0;
+    transform: scale(1.3);
+  }
+  20%, 75% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0);
+  }
+}
+
+
+@keyframes fadeInflag {
+    0% {  opacity: 0; }
+    99% {  opacity: 0; }
+    100%{ opacity: 1; }
+}
+ 
+@keyframes mask-playzero {
+  from {
+    mask-position: 0 0;
+  }
+  to {
+      mask-position: 100% 0;
+  }
+}
+
+</style>
+
+
+
+<script type="text/javascript">
+  
+var i=0;
+const encimas = document.querySelectorAll('.encima');
+
+
+
+setInterval(toggleClass, 5000);
+
+function toggleClass() {
+    if(i==0){
+      
+      encimas[i].classList.add('encima-anim');
+
+    }else{
+
+      encimas[i].parentElement.style.display = 'block';      
+      encimas[i].classList.add('encima-anim');
+    }
+
+    i++;
+}
+
+
+// stars on top - animation
+var WIDTH, HEIGHT, canvas, con, g;
+var pxs = []; 
+var rint = 1;   
+$(document).ready(function() {
+    var windowSize = function() {
+        WIDTH = $('.galaxy-wrapper').innerWidth();
+        HEIGHT = $('.galaxy-wrapper').innerHeight();
+        canvas = $('#galaxy');
+        canvas.attr('width', WIDTH).attr('height', HEIGHT);
+    };
+  
+    windowSize();
+  
+    $(window).resize(function() {
+        windowSize();
+    });
+
+    con = canvas[0].getContext('2d');
+    for (var i = 0; i < 100; i++) {
+        pxs[i] = new Circle();
+        pxs[i].reset();
+    }
+    requestAnimationFrame(draw);
+});
+
+function draw() {
+    con.clearRect(0, 0, WIDTH, HEIGHT);
+    con.globalCompositeOperation = "lighter";
+    for (var i = 0; i < pxs.length; i++) {
+        pxs[i].fade();
+        pxs[i].move();
+        pxs[i].draw();
+    }
+    requestAnimationFrame(draw);
+}
+
+function Circle() {
+    this.s = {
+        ttl: 15000,
+        xmax: 5,
+        ymax: 2,
+        rmax: 17,
+        rt: 1,
+        xdef: 960,
+        ydef: 540,
+        xdrift: 2,
+        ydrift: 2,
+        random: true,
+        blink: true
+    };
+    this.reset = function() {
+        this.x = (this.s.random ? WIDTH * Math.random() : this.s.xdef);
+        this.y = (this.s.random ? HEIGHT * Math.random() : this.s.ydef);
+        this.r = ((this.s.rmax - 1) * Math.random()) + 1;
+        this.dx = (Math.random() * this.s.xmax) * (Math.random() < 0.5 ? -1 : 1);
+        this.dy = (Math.random() * this.s.ymax) * (Math.random() < 0.5 ? -1 : 1);
+        this.hl = (this.s.ttl / rint) * (this.r / this.s.rmax);
+        this.rt = Math.random() * this.hl;
+        this.s.rt = Math.random() + 1;
+        this.stop = Math.random() * 0.2 + 0.4;
+        this.s.xdrift *= Math.random() * (Math.random() < 0.5 ? -1 : 1);
+        this.s.ydrift *= Math.random() * (Math.random() < 0.5 ? -1 : 1);
+    };
+    this.fade = function() {
+        this.rt += this.s.rt;
+    };
+    this.draw = function() {
+        if (this.s.blink && (this.rt <= 0 || this.rt >= this.hl)) this.s.rt = this.s.rt * -1;
+        else if (this.rt >= this.hl) this.reset();
+        var newo = 1 - (this.rt / this.hl);
+        con.beginPath();
+        con.arc(this.x, this.y, this.r, 0, Math.PI * 2, true);
+        con.closePath();
+        var cr = this.r * newo;
+        g = con.createRadialGradient(this.x, this.y, 0, this.x, this.y, (cr <= 0 ? 1 : cr));
+        g.addColorStop(0.0, 'rgba(193,254,254,' + newo + ')');
+        g.addColorStop(this.stop, 'rgba(193,254,254,' + (newo * 0.2) + ')');
+        g.addColorStop(1.0, 'rgba(193,254,254,0)');
+        con.fillStyle = g;
+        con.fill();
+    };
+    this.move = function() {
+        this.x += (this.rt / this.hl) * this.dx;
+        this.y += (this.rt / this.hl) * this.dy;
+        if (this.x > WIDTH || this.x < 0) this.dx *= -1;
+        if (this.y > HEIGHT || this.y < 0) this.dy *= -1;
+    };
+    this.getX = function() {
+        return this.x;
+    };
+    this.getY = function() {
+        return this.y;
+    };
+};
+
+
+
+</script>
